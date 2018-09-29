@@ -1,0 +1,15 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "server side code for squad app",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js --exec 'npm run lint && node'",
+    "lint": "./node_modules/.bin/eslint '**/*.js'"
+  },
+  "author": "William Thompson",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
