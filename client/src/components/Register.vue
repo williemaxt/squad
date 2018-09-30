@@ -18,24 +18,25 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="inputAddress">Address</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    <label for="inputAddress">Name</label>
+    <input type="text" v-model="name" class="form-control" id="inputAddress" placeholder="John Doe">
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputCity">City</label>
-      <input type="text" class="form-control" id="inputCity">
+      <input type="text" v-model="city" class="form-control" id="inputCity">
     </div>
     <div class="form-group col-md-4">
       <label for="inputState">State</label>
-      <select id="inputState" class="form-control">
+      <select id="inputState" v-model="state" class="form-control">
         <option selected>Choose...</option>
-        <option>...</option>
+        <option>IN</option>
+        <option>PA</option>
       </select>
     </div>
     <div class="form-group col-md-2">
       <label for="inputZip">Zip</label>
-      <input type="text" class="form-control" id="inputZip">
+      <input type="text" v-model="zip" class="form-control" id="inputZip">
     </div>
   </div>
   <div class="form-group">
@@ -61,13 +62,17 @@ export default {
     return {
       email: null,
       password: null,
+      name: null,
+      city: null,
+      state: null,
+      zip: null,
       prompt: null
     }
 },
 methods: {
   async register(){
     console.log('Register button was clicked')
-    if(this.email == null || this.password == null){
+    if(this.email == null || this.password == null || this.name == null || this.city == null || this.state == null || this.zip == null){
       this.prompt = 'Please check all fields'
       console.log('the form was not valid')
     } else {
@@ -75,9 +80,20 @@ methods: {
       //establish the function call as a constant
       const response = await AuthService.register({
         email: this.email,
-        password: this.password
+        password: this.password,
+        name: this.name,
+        city: this.city,
+        state: this.state,
+        zip: this.zip
       })
       console.log(response.data)
+      // clearing the fields
+      this.email = null
+      this.password = null
+      this.name = null
+      this.city = null
+      this.state = null
+      this.zip = null
     }
   }
 }

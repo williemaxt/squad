@@ -3,7 +3,7 @@ import Api from '@/services/Api'
 //exporting this object that has a register method
 export default {
   register(credentials){
-    return Api().post('Register', credentials)
+    return Api().post('register', credentials)
   }
 }
 
