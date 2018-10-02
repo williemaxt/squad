@@ -10,6 +10,7 @@
   "author": "William Thompson",
   "license": "MIT",
   "dependencies": {
+<<<<<<< HEAD
     "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
@@ -17,5 +18,11 @@
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4"
+=======
+    "eslint": "^5.6.1",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.4",
+    "sequelize": "^4.39.0"
+>>>>>>> 8afacdf8335c11b7edbd7b8cba01feb04d00809d
   }
 }
