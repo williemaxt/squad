@@ -31,6 +31,38 @@ app.get('/profile', (req, res) => {
   })
 })
 
+app.post('/login', (req, res) => {
+  //perform queries and bcrypt actions here
+  //Setting variables for email and password
+  var email = req.body.email;
+  var password = req.body.password;
+  var hash;
+  // sql query
+  connection.conn.connect()
+  // example query to show that we can select individuals
+  var sql = 'SELECT password FROM users WHERE email LIKE "'+email+'"'
+  console.log(sql)
+  // executing the query
+  connection.conn.query(sql, function (err, result, fields) {
+    if (err) throw err;
+    // variable for hash from database
+    hash = result[0].password
+    //matching the hash to the password
+    if(bcrypt.compareSync(password, hash)) {
+    // Passwords match
+    console.log('The login was successful')
+    } else {
+    // Passwords don't match
+    console.log('the login was not successful');
+    }
+  })
+  //closing the connection
+  connection.conn.end()
+  res.send({
+    message: 'the request is reaching me'
+  })
+})
+
 // this returns a different result based on the url entered for get request
 app.post('/register', (req, res) => {
   //getting variables from the post body
@@ -47,11 +79,10 @@ app.post('/register', (req, res) => {
   connection.conn.connect()
   // example query to show that we can select individuals
   var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+state+'", "'+city+'", '+zip+')'
-
   // executing the query
   connection.conn.query(sql, function (err, result) {
     if (err) throw err;
-    console.log("1 record inserted");
+    console.log("Account Created");
   })
   //closing the connection
   connection.conn.end()

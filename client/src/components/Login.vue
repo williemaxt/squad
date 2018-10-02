@@ -4,8 +4,11 @@
     <div class="col">
       <br>
       <br>
-      <h1 class="display-3">Squad</h1>
+      <h1 class="display-4">Squad</h1>
       <p>Where Lifelong Friends Connect</p>
+      <div class="alert alert-danger" role="alert" v-show="prompt">
+        {{prompt}}
+      </div>
       <br>
       <form>
         <div class="form-group">
@@ -17,7 +20,7 @@
         <label for="exampleInputPassword1">Password</label>
         <input type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
-      <button type="submit" class="btn btn-success">Sign In</button>
+      <button type="submit" v-on:click="login" class="btn btn-success">Sign In</button>
       <router-link to="/Register"><button type="submit" class="btn btn-dark">register</button></router-link>
     </form>
   </div>
@@ -26,12 +29,35 @@
 </template>
 
 <script>
+// Importing the Authentication service we created
+import AuthService from '@/services/AuthService'
 export default {
   name: 'Login',
   data () {
     return {
-      email: 'something',
-      password: '123455'
+      email: null,
+      password: null,
+      prompt: null
+    }
+  },
+  methods:{
+    login(){
+      console.log('Register button was clicked')
+      if(this.email == null || this.password == null){
+        this.prompt = 'Please check all fields'
+        console.log('the form was not valid')
+      } else {
+        console.log('the form was valid')
+        //establish the function call as a constant
+        const response = AuthService.login({
+          email: this.email,
+          password: this.password
+        })
+        console.log(response.data)
+        // clearing the fields
+        this.email = null
+        this.password = null
+      }
     }
   }
 }
