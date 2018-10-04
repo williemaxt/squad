@@ -53,10 +53,12 @@ export default {
           email: this.email,
           password: this.password
         })
-        console.log(response.data)
+        console.log('response is: '+response.body) // TODO: log response body
         // clearing the fields
         this.email = null
         this.password = null
+        //redirecting to dashboard page
+      //  this.$router.push({name: 'Dashboard', params:{email: this.email}});
       }
     }
   }

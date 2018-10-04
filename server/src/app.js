@@ -50,17 +50,20 @@ app.post('/login', (req, res) => {
     //matching the hash to the password
     if(bcrypt.compareSync(password, hash)) {
     // Passwords match
+    res.send({
+      email: `${req.body.email}`
+    })
     console.log('The login was successful')
     } else {
     // Passwords don't match
+    res.send({
+      message: `The Login was not successful`
+    })
     console.log('the login was not successful');
     }
   })
   //closing the connection
   connection.conn.end()
-  res.send({
-    message: 'the request is reaching me'
-  })
 })
 
 // this returns a different result based on the url entered for get request
@@ -72,7 +75,7 @@ app.post('/register', (req, res) => {
   var city = req.body.city
   var state = req.body.state
   var zip = req.body.zip
-  let hash = bcrypt.hashSync(password, 10);
+  let hash = bcrypt.hashSync(password, 12); // TODO: change value
   //logging for development
   console.log(hash);
   // sql query
@@ -87,7 +90,7 @@ app.post('/register', (req, res) => {
   //closing the connection
   connection.conn.end()
   res.send({
-    message: `Hello ${req.body.name} you have successfully registered`
+    message: `Hello ${req.body.name} you have successfully registered` 
   })
 })
 
