@@ -31,7 +31,7 @@ app.get('/profile', (req, res) => {
   })
 })
 
-app.post('/login', (req, res) => {
+app.post('/login', (req, res) => { 
   //perform queries and bcrypt actions here
   //Setting variables for email and password
   var email = req.body.email;
@@ -90,7 +90,7 @@ app.post('/register', (req, res) => {
   //closing the connection
   connection.conn.end()
   res.send({
-    message: `Hello ${req.body.name} you have successfully registered` 
+    message: `Hello ${req.body.name} you have successfully registered`
   })
 })
 

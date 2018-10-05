@@ -41,7 +41,7 @@ export default {
     }
   },
   methods:{
-    login(){
+    async login(){
       console.log('Register button was clicked')
       if(this.email == null || this.password == null){
         this.prompt = 'Please check all fields'
@@ -49,16 +49,20 @@ export default {
       } else {
         console.log('the form was valid')
         //establish the function call as a constant
-        const response = AuthService.login({
+        // await can only be used ina an async function
+        const response = await AuthService.login({
           email: this.email,
           password: this.password
         })
-        console.log('response is: '+response.body) // TODO: log response body
-        // clearing the fields
-        this.email = null
-        this.password = null
+        const userEmail = response.data.email
+
+        console.log('response is: '+userEmail) // TODO: log response body
         //redirecting to dashboard page
-      //  this.$router.push({name: 'Dashboard', params:{email: this.email}});
+        if (this.email == userEmail){
+          this.$router.push({name: 'Dashboard', params:{email: this.email}});
+        } else {
+          this.prompt = 'Login Failed'
+        }
       }
     }
   }
