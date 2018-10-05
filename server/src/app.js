@@ -31,7 +31,7 @@ app.get('/profile', (req, res) => {
   })
 })
 
-app.post('/login', (req, res) => { 
+app.post('/login', (req, res) => {
   //perform queries and bcrypt actions here
   //Setting variables for email and password
   var email = req.body.email;
@@ -81,7 +81,7 @@ app.post('/register', (req, res) => {
   // sql query
   connection.conn.connect()
   // example query to show that we can select individuals
-  var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+state+'", "'+city+'", '+zip+')'
+  var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+state+'", "'+city+'", '+zip+')' 
   // executing the query
   connection.conn.query(sql, function (err, result) {
     if (err) throw err;
