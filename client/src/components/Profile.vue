@@ -23,6 +23,11 @@
               </div>
               <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
               <small class="text-muted">Donec id elit non mi porta.</small>
+              <!--Post Action Buttons-->
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-success">Edit</button>
+                <button type="button" class="btn btn-outline-danger">Delete</button>
+              </div>
             </a>
           </div>
         </div>
