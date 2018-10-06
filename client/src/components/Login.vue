@@ -1,4 +1,6 @@
 <template>
+<div>
+  <PublicNav/>
 <div class="container">
   <div class="row">
     <div class="col">
@@ -21,16 +23,18 @@
         <input type="password" v-model="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
       </div>
       <button type="submit" v-on:click="login" class="btn btn-success">Sign In</button>
-      <router-link to="/Register"><button type="submit" class="btn btn-dark">register</button></router-link>
+      <router-link to="/Register"><button type="submit" class="btn btn-outline-light">register</button></router-link>
     </form>
   </div>
   </div>
+</div>
 </div>
 </template>
 
 <script>
 // Importing the Authentication service we created
 import AuthService from '@/services/AuthService'
+import PublicNav from '@/components/navComponents/PublicNav'
 export default {
   name: 'Login',
   data () {
@@ -65,6 +69,9 @@ export default {
         }
       }
     }
+  },
+  components:{
+    PublicNav
   }
 }
 </script>
@@ -73,5 +80,8 @@ export default {
 <style scoped>
   .row{
     margin-top: 10vh;
+  }
+  .container{
+    color: #fff;
   }
 </style>

@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <!-- As a heading -->
-    <nav class="navbar navbar-dark bg-dark">
-      <span class="navbar-brand mb-0 h1">Squad</span>
-    </nav>
     <router-view/>
   </div>
 </template>
@@ -23,6 +19,6 @@ export default {
 }
 body{
   margin: 0;
-  background: #f2f2f2;
+  background: #3A3E44;
 }
 </style>

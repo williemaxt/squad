@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <UserNav/>
   <div class="container-fluid">
     <div class="row">
       <!--Main Card-->
@@ -6,7 +8,7 @@
       <!--Navigation Buttons-->
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-success">Feed</button>
-        <button type="button" class="btn btn-outline-success">Profile</button>
+        <button type="button" class="btn btn-light">Profile</button>
       </div>
       <div class="card">
         <h5 class="card-header">Feed</h5>
@@ -26,14 +28,14 @@
       <!--Navigation Buttons-->
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-success">Friends</button>
-        <button type="button" class="btn btn-outline-success">Add</button>
+        <button type="button" class="btn btn-light">Add</button>
       </div>
       <div class="card">
         <h5 class="card-header">Quick Messages</h5>
         <div class="card-body">
           <ul class="list-group" id="messages-list">
             <!--Call QuickMessages component-->
-            <QuickMessages></QuickMessages>
+            <QuickMessages/>
           </ul>
         </div>
       </div>
@@ -49,6 +51,7 @@
     </div>
   </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -57,6 +60,7 @@ import Feed from '@/components/dashComponents/Feed'
 import QuickMessages from '@/components/dashComponents/QuickMessages'
 import ActiveFriends from '@/components/dashComponents/ActiveFriends'
 import PostForm from '@/components/dashComponents/PostForm'
+import UserNav from '@/components/navComponents/UserNav'
 export default{
   name: 'Dashboard',
   data(){
@@ -70,7 +74,8 @@ export default{
     Feed,
     QuickMessages,
     ActiveFriends,
-    PostForm
+    PostForm,
+    UserNav
   }
 }
 </script>

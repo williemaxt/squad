@@ -1,4 +1,6 @@
 <template>
+  <div>
+    <PublicNav/>
   <div class="container">
     <br>
     <br>
@@ -48,14 +50,16 @@
     </div>
   </div>
   <button type="submit" v-on:click="register" class="btn btn-success">Create Account</button>
-  <router-link to="/"><button type="submit" class="btn btn-dark">Sign In</button></router-link>
+  <router-link to="/"><button type="submit" class="btn btn-outline-light">Sign In</button></router-link>
 </form>
-  </div>
+</div>
+</div>
 </template>
 
 <script>
 // Importing the Authentication service we created
 import AuthService from '@/services/AuthService'
+import PublicNav from '@/components/navComponents/PublicNav'
 export default {
   name: 'Register',
   data () {
@@ -96,6 +100,9 @@ methods: {
       this.zip = null
     }
   }
+},
+components:{
+  PublicNav
 }
 }
 </script>
@@ -103,5 +110,6 @@ methods: {
 <style scoped>
   .container{
     margin-top: 10vh;
+    color: #fff;
   }
 </style>
