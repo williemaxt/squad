@@ -22,8 +22,17 @@ export default new Router({
     {
       path: '/Dashboard',
       name: 'Dashboard',
-      component: Dashboard
-    },
+      component: Dashboard,
+      props: true,
+      beforeEnter: (to, from , next) => {
+        if (to.params.email){
+          console.log(to.params.email+' From route')
+          next()
+        } else {
+          next({name: 'Login'})
+        }
+        }
+      },
     {
       path: '/Profile',
       name: 'Profile',

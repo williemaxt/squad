@@ -81,7 +81,7 @@ app.post('/register', (req, res) => {
   // sql query
   connection.conn.connect()
   // example query to show that we can select individuals
-  var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+state+'", "'+city+'", '+zip+')' 
+  var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+state+'", "'+city+'", '+zip+')'
   // executing the query
   connection.conn.query(sql, function (err, result) {
     if (err) throw err;
@@ -91,7 +91,7 @@ app.post('/register', (req, res) => {
   connection.conn.end()
   res.send({
     message: `Hello ${req.body.name} you have successfully registered`
-  })
+  }) 
 })
 
 // allowig app to begin listening for requests(starting server)

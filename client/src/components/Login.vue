@@ -60,7 +60,7 @@ export default {
         })
         const userEmail = response.data.email
 
-        console.log('response is: '+userEmail) // TODO: log response body
+        console.log('response is: '+userEmail) 
         //redirecting to dashboard page
         if (this.email == userEmail){
           this.$router.push({name: 'Dashboard', params:{email: this.email}});
