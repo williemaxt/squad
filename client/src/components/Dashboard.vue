@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UserNav/>
+    <UserNav :email="email"/>
   <div class="container-fluid">
     <div class="row">
       <!--Main Card-->
@@ -18,7 +18,7 @@
           <!--Posts-->
           <div class="list-group" id="feed-list">
             <!--Call Feed Component-->
-            <Feed/>
+            <Feed :email="email"/>
           </div>
         </div>
       </div>

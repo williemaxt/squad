@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Register from '@/components/Register'
 import Dashboard from '@/components/Dashboard'
 import Profile from '@/components/Profile'
+import NoAuth from '@/components/NoAuth'
 
 Vue.use(Router)
 
@@ -29,7 +30,7 @@ export default new Router({
           console.log(to.params.email+' From route')
           next()
         } else {
-          next({name: 'Login'})
+          next({name: 'NoAuth'})
         }
         }
       },
@@ -37,6 +38,11 @@ export default new Router({
       path: '/Profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/NoAuth',
+      name: 'NoAuth',
+      component: NoAuth
     }
   ]
 })

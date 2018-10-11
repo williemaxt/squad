@@ -13,22 +13,24 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-// this returns a different result based on the url entered for get request
-app.get('/profile', (req, res) => {
+// End point to retrieve posts
+app.post('/getPosts', (req, res) => {
+  var email = req.body.email;
+  console.log('the email is: '+email)
+  var data;
   // sql query
   connection.conn.connect()
   // example query to show that we can select individuals
-  connection.conn.query('SELECT * FROM users WHERE name LIKE "Michael Example"', function (err, rows, fields) {
+  connection.conn.query('SELECT * FROM posts WHERE user LIKE "'+email+'"', function (err, result, fields) {
   if (err) throw err
   // logging our results for development
-  console.log('The Name is: ', rows[0].name)
-  console.log('The Email is: ', rows[0].email)
+  console.log(result)
+  //parsing the raw data packets into json
+  data = JSON.stringify(result)
+  res.send(data)
   //closing the connection
   connection.conn.end()
 })
-  res.send({
-    message: 'hello world'
-  })
 })
 
 app.post('/login', (req, res) => {
@@ -91,7 +93,7 @@ app.post('/register', (req, res) => {
   connection.conn.end()
   res.send({
     message: `Hello ${req.body.name} you have successfully registered`
-  }) 
+  })
 })
 
 // allowig app to begin listening for requests(starting server)

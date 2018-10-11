@@ -7,6 +7,9 @@ export default {
   },
   login(credentials){
     return Api().post('login', credentials)
+  },
+  getPosts(credentials){
+    return Api().post('getPosts', credentials)
   }
 }
 
