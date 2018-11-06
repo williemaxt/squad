@@ -1,13 +1,12 @@
 <template>
 <div>
-  <button v-on:click="load" name="button">Load Posts(Development)</button>
-  <a href="#" v-for="post in posts" class="list-group-item list-group-item-action flex-column align-items-start">
+  <a href="#" v-for="post in postsList" class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{email}}</h5>
-      <small class="text-muted">3 days ago {{globalUser}}</small>
+      <h5 class="mb-1">{{post.title}}</h5>
+      <small class="text-muted">3 days ago {{post.user}}</small>
     </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
+    <p class="mb-1">{{post.body}}</p>
+    <small class="text-muted">{{post.timestamp}}</small>
   </a>
 </div>
 </template>
@@ -21,24 +20,32 @@ export default {
   data(){
     return{
       //data goes here
-      globalUser: globalEmail.globalEmail,
-      posts:[]
+      postsList:[] // list where data will be pushed
     }
   },
   methods: {
-    updateUser(){
-      this.globalUser = 'newone@gmail.com'
-      alert(globalEmail.globalEmail)
-    },
-    async load(){
-        const posts = await AuthService.getPosts({
-          email: 'test@gmail.com', // TODO: use variable in production
-        })
-
-        console.log(JSON.stringify(posts.data));
-
-        this.posts = JSON.stringify(posts.data)
-      }
+    //methods go here
+  },
+  async mounted(){
+    const posts = await AuthService.getPosts({
+      email: 'test@gmail.com', // TODO: use variable in production
+    })
+    //puting our response data into a variable
+    var info = posts.data;
+    //loop index
+    var i = 0;
+    //looping through the info variable
+    for(var id in info){
+      //pushing the information into our array
+      this.postsList.push({
+      id: info[i].id,
+      user: info[i].user,
+      title: info[i].title, // select title from the data
+      body:info[i].body,
+      timestamp: info[i].timestamp });
+      //incrementing our loop index by one 
+      i += 1;
+    }
   }
 }
 </script>
