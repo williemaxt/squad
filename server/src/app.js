@@ -13,14 +13,50 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 
+//end point to create a post
+app.post('/createPost', (req,res) => {
+  //variables to get data from request body
+  var user = req.body.title
+  var title = req.body.title
+  var body = req.body.body
+  var timestamp; // TODO: CREATE AUTOMATIC TIMESTAMP
+
+  //sql statement
+  var sql = 'INSERT INTO posts (user, title, body, timestamp) VALUES (?,?,?,?)'
+
+  //performing ther query
+  connection.conn.query(sql, [user, title, body, timestamp], (err, result, fields) => {
+    if(err) throw err; //if there is an error then it will throw an error
+    //after successful query send a success message to client
+    res.send('success')
+  });
+});
+
+//end point to delete posts
+app.post('/deletePost', (req,res) => {
+  //variable to retrieve the post id from the request body
+  var postId = req.body.postId;
+  //sql statement
+  var sql = 'DELETE * FROM posts WHERE id = ?'
+
+  //executing the query
+  connection.conn.query(sql, [postId], (err, result, fields) => {
+    //thorow error if found
+    if (err) throw err;
+    //if query was successful, prompt the user
+    res.send('success');
+  });
+});
+
 // End point to retrieve posts
 app.post('/getPosts', (req, res) => {
   var email = req.body.email;
-  console.log('the email is: '+email);
+  //variable for holding the result of the query
   var data;
   // sql query
+  var sql = 'SELECT * FROM posts WHERE user LIKE ?'
   // example query to show that we can select individuals
-  connection.conn.query('SELECT * FROM posts WHERE user LIKE "'+email+'"', function (err, result, fields) {
+  connection.conn.query(sql, [email], function (err, result, fields) {
   if (err) throw err;
   // logging our results for development
   console.log(result);
@@ -38,10 +74,10 @@ app.post('/login', (req, res) => {
   var hash;
   // sql query
   // example query to show that we can select individuals
-  var sql = 'SELECT password FROM users WHERE email LIKE "'+email+'"';
+  var sql = 'SELECT password FROM users WHERE email LIKE ?';
   console.log(sql);
   // executing the query
-  connection.conn.query(sql, function (err, result, fields) {
+  connection.conn.query(sql,[email], function (err, result, fields) {
     if (err) throw err;
     // variable for hash from database
     hash = result[0].password;
@@ -76,9 +112,9 @@ app.post('/register', (req, res) => {
   console.log(hash);
   // sql query
   // example query to show that we can select individuals
-  var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES ("'+name+'", "'+email+'", "'+hash+'", "'+state+'", "'+city+'", '+zip+')'
+  var sql = 'INSERT INTO users (name, email, password, state, city, zip) VALUES (?,?,?,?,?,?)'
   // executing the query
-  connection.conn.query(sql, function (err, result) {
+  connection.conn.query(sql,[name, email, hash, state, city, zip], function (err, result) {
     if (err) throw err;
     console.log("Account Created");
   });
